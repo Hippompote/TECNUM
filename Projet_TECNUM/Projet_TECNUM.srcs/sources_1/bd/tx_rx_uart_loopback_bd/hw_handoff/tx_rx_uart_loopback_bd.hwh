@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Mar  5 10:49:35 2024" VIVADOVERSION="2018.2.1">
+
+  <SYSTEMINFO ARCH="artix7" BOARD="digilentinc.com:nexys-a7-100t:part0:1.3" DEVICE="7a100t" NAME="tx_rx_uart_loopback_bd" PACKAGE="csg324" SPEEDGRADE="-1"/>
+
+  <EXTERNALPORTS>
+    <PORT DIR="I" NAME="S_0" SIGIS="undef" SIGNAME="External_Ports_S_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="mux2x11b_0" PORT="S"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk_0" SIGIS="clk" SIGNAME="External_Ports_clk_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="baud_rate_gen_0" PORT="clk"/>
+        <CONNECTION INSTANCE="rx_uart_0" PORT="clk"/>
+        <CONNECTION INSTANCE="tx_uart_0" PORT="clk"/>
+        <CONNECTION INSTANCE="led_ctrl_0" PORT="clk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="rst_0" SIGIS="rst" SIGNAME="External_Ports_rst_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="baud_rate_gen_0" PORT="rst"/>
+        <CONNECTION INSTANCE="rx_uart_0" PORT="rst"/>
+        <CONNECTION INSTANCE="tx_uart_0" PORT="rst"/>
+        <CONNECTION INSTANCE="led_ctrl_0" PORT="reset"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="rx_0" SIGIS="undef" SIGNAME="External_Ports_rx_0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="rx_uart_0" PORT="rx"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="tx_0" SIGIS="undef" SIGNAME="tx_uart_0_tx">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="tx_uart_0" PORT="tx"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="15" NAME="led_0" RIGHT="0" SIGIS="undef" SIGNAME="led_ctrl_0_led">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="led_ctrl_0" PORT="led"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <EXTERNALINTERFACES/>
+
+  <MODULES>
+    <MODULE FULLNAME="/baud_rate_gen_0" HWVERSION="1.0" INSTANCE="baud_rate_gen_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="baud_rate_gen" VLNV="xilinx.com:module_ref:baud_rate_gen:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_baud_rate_gen_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="External_Ports_rst_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="10" NAME="dvsr" RIGHT="0" SIGIS="undef" SIGNAME="mux2x11b_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mux2x11b_0" PORT="O"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tick" SIGIS="undef" SIGNAME="baud_rate_gen_0_tick">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="rx_uart_0" PORT="s_tick"/>
+            <CONNECTION INSTANCE="tx_uart_0" PORT="s_tick"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/led_ctrl_0" HWVERSION="1.0" INSTANCE="led_ctrl_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="led_ctrl" VLNV="xilinx.com:module_ref:led_ctrl:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_led_ctrl_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="reset" SIGIS="rst" SIGNAME="External_Ports_rst_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="tick" SIGIS="undef" SIGNAME="tx_uart_0_tx_done">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="tx_uart_0" PORT="tx_done"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="15" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="led_ctrl_0_led">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="led_0"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/mux2x11b_0" HWVERSION="1.0" INSTANCE="mux2x11b_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="mux2x11b" VLNV="xilinx.com:module_ref:mux2x11b:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_mux2x11b_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="10" NAME="A" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_0" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="10" NAME="B" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlconstant_1" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S" SIGIS="undef" SIGNAME="External_Ports_S_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="S_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="10" NAME="O" RIGHT="0" SIGIS="undef" SIGNAME="mux2x11b_0_O">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="baud_rate_gen_0" PORT="dvsr"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/rx_uart_0" HWVERSION="1.0" INSTANCE="rx_uart_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="rx_uart" VLNV="xilinx.com:module_ref:rx_uart:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_rx_uart_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="rx" SIGIS="undef" SIGNAME="External_Ports_rx_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rx_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_tick" SIGIS="undef" SIGNAME="baud_rate_gen_0_tick">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="baud_rate_gen_0" PORT="tick"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="External_Ports_rst_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="7" NAME="d_out" RIGHT="0" SIGIS="undef" SIGNAME="rx_uart_0_d_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="tx_uart_0" PORT="din"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="rx_done_tick" SIGIS="undef" SIGNAME="rx_uart_0_rx_done_tick">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="tx_uart_0" PORT="tx_start"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/tx_uart_0" HWVERSION="1.0" INSTANCE="tx_uart_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="tx_uart" VLNV="xilinx.com:module_ref:tx_uart:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_tx_uart_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="rst" SIGIS="rst" SIGNAME="External_Ports_rst_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk_0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_tick" SIGIS="undef" SIGNAME="baud_rate_gen_0_tick">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="baud_rate_gen_0" PORT="tick"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="tx_start" SIGIS="undef" SIGNAME="rx_uart_0_rx_done_tick">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="rx_uart_0" PORT="rx_done_tick"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="din" RIGHT="0" SIGIS="undef" SIGNAME="rx_uart_0_d_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="rx_uart_0" PORT="d_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tx" SIGIS="undef" SIGNAME="tx_uart_0_tx">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="tx_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tx_done" SIGIS="undef" SIGNAME="tx_uart_0_tx_done">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="led_ctrl_0" PORT="tick"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_0" HWVERSION="1.1" INSTANCE="xlconstant_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="11"/>
+        <PARAMETER NAME="CONST_VAL" VALUE="0x28A"/>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_xlconstant_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" LEFT="10" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mux2x11b_0" PORT="A"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_1" HWVERSION="1.1" INSTANCE="xlconstant_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="11"/>
+        <PARAMETER NAME="CONST_VAL" VALUE="0x036"/>
+        <PARAMETER NAME="Component_Name" VALUE="tx_rx_uart_loopback_bd_xlconstant_0_2"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" LEFT="10" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="mux2x11b_0" PORT="B"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+  </MODULES>
+
+</EDKSYSTEM>
