@@ -46,7 +46,8 @@ architecture rtl of rx_uart is
 -- States declaration
 type states is (idle, start, data, stop);
 signal current_state, next_state: states;
-signal cnt_ticks: integer := 0;
+signal cnt_ticks, cnt_ticks_reg: integer := 0;
+signal cnt_bits, cnt_bits_reg: integer := 0;
 
 begin
 
@@ -55,9 +56,12 @@ process(rst,clk)
 begin
 if (rst <= '1') then
     current_state <= idle;
+    cnt_ticks_reg <= 0;
+    cnt_bits_reg <= 0;
 elsif (rising_edge(clk)) then
     current_state <= next_state;
-    cnt_ticks <= 0;
+    cnt_ticks_reg <= cnt_ticks;
+    cnt_bits_reg <= cnt_bits;
 end if;
 end process;
 
@@ -67,9 +71,12 @@ process(current_state, rx, s_tick)
 begin
 
 next_state <= current_state;
+cnt_ticks <= cnt_ticks_reg;
+cnt_bits <= cnt_bits_reg;
 
 case current_state is
     when idle =>
+        rx_done_tick <= '0';
         if(rx = '0') then
             cnt_ticks <= 0;
             next_state <= start;
@@ -79,11 +86,12 @@ case current_state is
     
     when start =>
         if s_tick='1' then
-            if cnt_ticks = 7 then
+            if cnt_ticks_reg = 7 then
                 cnt_ticks <= 0;
+                cnt_bits <= 0;
                 next_state <= data;
             else
-                cnt_ticks <= cnt_ticks + 1;
+                cnt_ticks <= cnt_ticks_reg + 1;
                 next_state <= start;
             end if;
         else
@@ -92,10 +100,36 @@ case current_state is
     
     when data =>
         if s_tick = '1' then
-        
-        
-        
-
+            if cnt_ticks_reg = 15 then
+                cnt_ticks <= 0;
+                d_out(cnt_bits) <= rx;
+                if cnt_bits_reg = 7 then
+                    next_state <= stop;
+                else
+                    cnt_bits <= cnt_bits_reg + 1;
+                    next_state <= data;
+                end if;
+            else
+                cnt_ticks <= cnt_ticks_reg + 1;
+                next_state <= data;
+            end if;
+        else
+            next_state <= data;
+        end if;
+    
+    when stop =>
+        if s_tick = '1' then
+            if cnt_ticks_reg = 15 then
+                rx_done_tick <= '1';
+                cnt_ticks <= 0;
+                cnt_bits <= 0;
+                next_state <= idle;
+            else
+                cnt_ticks <= cnt_ticks_reg + 1;
+            end if;
+        else
+            next_state <= stop;
+        end if;
 
 end case;
 
