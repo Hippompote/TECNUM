@@ -34,13 +34,13 @@ use IEEE.NUMERIC_STD.ALL;
 entity baud_rate_gen is
     Port ( rst : in STD_LOGIC;
            clk : in STD_LOGIC;
+           dvsr : in STD_LOGIC_VECTOR(10 downto 0); -- 100MHz / (16 * BaudRate)
            tick : out STD_LOGIC); --Eventuellement rajouter une entrée pour choisir le baudrate (mux)
 end baud_rate_gen;
 
 architecture rtl of baud_rate_gen is
 
 signal counter_baudrate : integer := 0;
-constant baudrate_9600 : integer := 100000000/(16*9600);
 
 begin
 
@@ -50,7 +50,7 @@ begin
 if rst = '1' then
     tick <= '0';
 elsif rising_edge(clk) then
-    if ( counter_baudrate >= baudrate_9600) then
+    if ( counter_baudrate >= to_integer(unsigned(dvsr))) then
         counter_baudrate <= 0;
         tick <= '1';
     else

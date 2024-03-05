@@ -41,6 +41,7 @@ component baud_rate_gen is
     Port(
         clk: in std_logic;
         rst: in std_logic;
+        dvsr: in std_logic_vector(10 downto 0);
         tick: out std_logic
         );
 end component;
@@ -48,6 +49,7 @@ end component;
 signal rst: std_logic:= '0';
 signal clk: std_logic;
 signal tick: std_logic;
+signal dvsr: std_logic_vector(10 downto 0):= "01010001010"; -- Test pour BaudRate = 9600
 constant clk_periode : time:= 10ns;
 
 
@@ -57,7 +59,8 @@ uut: baud_rate_gen
     port map(
         clk => clk,
         rst => rst,
-        tick => tick
+        tick => tick,
+        dvsr => dvsr
     );
     
 clk_proc : process
