@@ -60,8 +60,8 @@ constant baudrate_period : time := 6510ns; --Période pour Baudrate = 9600 (soust
 
 begin
 
-uut: rx_uart
-    port map(
+UUT: rx_uart
+    Port map(
         rx => rx,
         clk => clk,
         s_tick => s_tick,
@@ -80,10 +80,10 @@ end process;
 
 baudrate_proc : process
 begin
+    s_tick <= '0';
+    wait for (baudrate_period-clk_period);
     s_tick <= '1';
     wait for clk_period;
-    s_tick <= '0';
-    wait for (baudrate_period - clk_period);
 end process;
 
 stim_proc : process
@@ -93,4 +93,5 @@ wait for 20*baudrate_period;
 rx <= '0';
 wait for 20*baudrate_period;
 end process;
+
 end rtl;
