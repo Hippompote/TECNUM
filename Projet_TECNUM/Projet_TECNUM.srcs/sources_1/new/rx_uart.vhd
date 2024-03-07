@@ -46,6 +46,7 @@ architecture rtl of rx_uart is
 -- States declaration
 type states is (idle, start, data, stop);
 signal current_state, next_state: states;
+
 signal cnt_ticks, cnt_ticks_reg: integer := 0;
 signal cnt_bits, cnt_bits_reg: integer := 0;
 
@@ -54,15 +55,15 @@ begin
 process(rst,clk)
 
 begin
-if (rst <= '1') then
-    current_state <= idle;
-    cnt_ticks_reg <= 0;
-    cnt_bits_reg <= 0;
-elsif (rising_edge(clk)) then
-    current_state <= next_state;
-    cnt_ticks_reg <= cnt_ticks;
-    cnt_bits_reg <= cnt_bits;
-end if;
+    if (rst <= '1') then
+        current_state <= idle;
+        cnt_ticks_reg <= 0;
+        cnt_bits_reg <= 0;
+    elsif (rising_edge(clk)) then
+        current_state <= next_state;
+        cnt_ticks_reg <= cnt_ticks;
+        cnt_bits_reg <= cnt_bits;
+    end if;
 end process;
 
 -- next-state logic
