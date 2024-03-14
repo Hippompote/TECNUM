@@ -55,7 +55,7 @@ begin
 process(rst,clk)
 
 begin
-    if (rst <= '1') then
+    if (rst = '1') then
         current_state <= idle;
         cnt_ticks_reg <= 0;
         cnt_bits_reg <= 0;

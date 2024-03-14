@@ -54,7 +54,7 @@ begin
 process(rst,clk)
 
 begin
-if (rst <= '1') then
+if (rst = '1') then
     current_state <= idle;
 elsif (rising_edge(clk)) then
     current_state <= next_state;
