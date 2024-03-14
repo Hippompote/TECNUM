@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root MajorVersion="0" MinorVersion="36">
+  <CompositeFile CompositeFileTopName="Motor_Stepper_Driver_bd" CanBeSetAsTop="false" CanDisplayChildGraph="true">
+    <Description>Composite Fileset</Description>
+    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1710404376"/>
+    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1710404376"/>
+    <Generation Name="SIMULATION" State="STALE" Timestamp="1710404376"/>
+    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1710404376"/>
+    <FileCollection Name="SOURCES" Type="SOURCES">
+      <File Name="ip\Motor_Stepper_Driver_bd_halfstep_precision_0_0\Motor_Stepper_Driver_bd_halfstep_precision_0_0.xci" Type="IP">
+        <Instance HierarchyPath="halfstep_precision_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_fullstep_lowtorque_0_0\Motor_Stepper_Driver_bd_fullstep_lowtorque_0_0.xci" Type="IP">
+        <Instance HierarchyPath="fullstep_lowtorque_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_fullstep_hightorque_0_0\Motor_Stepper_Driver_bd_fullstep_hightorque_0_0.xci" Type="IP">
+        <Instance HierarchyPath="fullstep_hightorque_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_mux_4x1b_0_0\Motor_Stepper_Driver_bd_mux_4x1b_0_0.xci" Type="IP">
+        <Instance HierarchyPath="mux_4x1b_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_mux_4x4b_0_0\Motor_Stepper_Driver_bd_mux_4x4b_0_0.xci" Type="IP">
+        <Instance HierarchyPath="mux_4x4b_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_clock_divider_0_0\Motor_Stepper_Driver_bd_clock_divider_0_0.xci" Type="IP">
+        <Instance HierarchyPath="clock_divider_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_xlconstant_0_0\Motor_Stepper_Driver_bd_xlconstant_0_0.xci" Type="IP">
+        <Instance HierarchyPath="xlconstant_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_xlconstant_0_1\Motor_Stepper_Driver_bd_xlconstant_0_1.xci" Type="IP">
+        <Instance HierarchyPath="xlconstant_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_xlconstant_1_0\Motor_Stepper_Driver_bd_xlconstant_1_0.xci" Type="IP">
+        <Instance HierarchyPath="xlconstant_2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\Motor_Stepper_Driver_bd_xlconstant_1_1\Motor_Stepper_Driver_bd_xlconstant_1_1.xci" Type="IP">
+        <Instance HierarchyPath="xlconstant_3"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+    </FileCollection>
+  </CompositeFile>
+</Root>
