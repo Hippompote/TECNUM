@@ -83,11 +83,11 @@ begin
 
     --wait for 100ns;
     
-    reset <= '0';
+    reset <= '1';
     sw0 <= '0';
     rx <= '1';
     wait for clk_periode*5;
-    reset <= '1';
+    reset <= '0';
     wait for clk_periode*100;
     
     -- BAUD RATE LOOP
