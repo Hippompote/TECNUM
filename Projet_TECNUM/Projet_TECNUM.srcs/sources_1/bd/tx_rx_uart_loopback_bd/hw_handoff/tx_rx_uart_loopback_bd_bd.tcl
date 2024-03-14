@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# baud_rate_gen, led_ctrl, mux2x11b, rx_uart, tx_uart
+# SYNCHRONIZER, SYNCHRONIZER, baud_rate_gen, led_ctrl, mux2x11b, rx_uart, tx_uart
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -165,13 +165,38 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
-  set S_0 [ create_bd_port -dir I S_0 ]
-  set clk_0 [ create_bd_port -dir I -type clk clk_0 ]
-  set led_0 [ create_bd_port -dir O -from 15 -to 0 led_0 ]
-  set rst_0 [ create_bd_port -dir I -type rst rst_0 ]
-  set rx_0 [ create_bd_port -dir I rx_0 ]
-  set tx_0 [ create_bd_port -dir O tx_0 ]
+  set LED [ create_bd_port -dir O -from 15 -to 0 LED ]
+  set clk [ create_bd_port -dir I -type clk clk ]
+  set_property -dict [ list \
+   CONFIG.ASSOCIATED_RESET {reset} \
+ ] $clk
+  set reset [ create_bd_port -dir I -type rst reset ]
+  set rx [ create_bd_port -dir I rx ]
+  set sw0 [ create_bd_port -dir I sw0 ]
+  set tx [ create_bd_port -dir O tx ]
 
+  # Create instance: SYNCHRONIZER_0, and set properties
+  set block_name SYNCHRONIZER
+  set block_cell_name SYNCHRONIZER_0
+  if { [catch {set SYNCHRONIZER_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $SYNCHRONIZER_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: SYNCHRONIZER_1, and set properties
+  set block_name SYNCHRONIZER
+  set block_cell_name SYNCHRONIZER_1
+  if { [catch {set SYNCHRONIZER_1 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $SYNCHRONIZER_1 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: baud_rate_gen_0, and set properties
   set block_name baud_rate_gen
   set block_cell_name baud_rate_gen_0
@@ -194,6 +219,10 @@ proc create_root_design { parentCell } {
      return 1
    }
   
+  set_property -dict [ list \
+   CONFIG.POLARITY {ACTIVE_LOW} \
+ ] [get_bd_pins /led_ctrl_0/reset]
+
   # Create instance: mux2x11b_0, and set properties
   set block_name mux2x11b
   set block_cell_name mux2x11b_0
@@ -242,17 +271,40 @@ proc create_root_design { parentCell } {
  ] $xlconstant_1
 
   # Create port connections
-  connect_bd_net -net S_0_1 [get_bd_ports S_0] [get_bd_pins mux2x11b_0/S]
+  connect_bd_net -net SYNCHRONIZER_0_q [get_bd_pins SYNCHRONIZER_0/q] [get_bd_pins rx_uart_0/rx]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets SYNCHRONIZER_0_q]
+  connect_bd_net -net SYNCHRONIZER_1_q [get_bd_pins SYNCHRONIZER_1/q] [get_bd_pins mux2x11b_0/S]
   connect_bd_net -net baud_rate_gen_0_tick [get_bd_pins baud_rate_gen_0/tick] [get_bd_pins rx_uart_0/s_tick] [get_bd_pins tx_uart_0/s_tick]
-  connect_bd_net -net clk_0_1 [get_bd_ports clk_0] [get_bd_pins baud_rate_gen_0/clk] [get_bd_pins led_ctrl_0/clk] [get_bd_pins rx_uart_0/clk] [get_bd_pins tx_uart_0/clk]
-  connect_bd_net -net led_ctrl_0_led [get_bd_ports led_0] [get_bd_pins led_ctrl_0/led]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets baud_rate_gen_0_tick]
+  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins SYNCHRONIZER_0/clk] [get_bd_pins SYNCHRONIZER_1/clk] [get_bd_pins baud_rate_gen_0/clk] [get_bd_pins led_ctrl_0/clk] [get_bd_pins rx_uart_0/clk] [get_bd_pins tx_uart_0/clk]
+  connect_bd_net -net led_ctrl_0_led [get_bd_ports LED] [get_bd_pins led_ctrl_0/led]
   connect_bd_net -net mux2x11b_0_O [get_bd_pins baud_rate_gen_0/dvsr] [get_bd_pins mux2x11b_0/O]
-  connect_bd_net -net rst_0_1 [get_bd_ports rst_0] [get_bd_pins baud_rate_gen_0/rst] [get_bd_pins led_ctrl_0/reset] [get_bd_pins rx_uart_0/rst] [get_bd_pins tx_uart_0/rst]
-  connect_bd_net -net rx_0_1 [get_bd_ports rx_0] [get_bd_pins rx_uart_0/rx]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets mux2x11b_0_O]
+  connect_bd_net -net rst_0_1 [get_bd_ports reset] [get_bd_pins SYNCHRONIZER_0/rst] [get_bd_pins SYNCHRONIZER_1/rst] [get_bd_pins baud_rate_gen_0/rst] [get_bd_pins led_ctrl_0/reset] [get_bd_pins rx_uart_0/rst] [get_bd_pins tx_uart_0/rst]
+  connect_bd_net -net rx_1 [get_bd_ports rx] [get_bd_pins SYNCHRONIZER_0/d]
   connect_bd_net -net rx_uart_0_d_out [get_bd_pins rx_uart_0/d_out] [get_bd_pins tx_uart_0/din]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets rx_uart_0_d_out]
   connect_bd_net -net rx_uart_0_rx_done_tick [get_bd_pins rx_uart_0/rx_done_tick] [get_bd_pins tx_uart_0/tx_start]
-  connect_bd_net -net tx_uart_0_tx [get_bd_ports tx_0] [get_bd_pins tx_uart_0/tx]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets rx_uart_0_rx_done_tick]
+  connect_bd_net -net sw0_1 [get_bd_ports sw0] [get_bd_pins SYNCHRONIZER_1/d]
+  connect_bd_net -net tx_uart_0_tx [get_bd_ports tx] [get_bd_pins tx_uart_0/tx]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets tx_uart_0_tx]
   connect_bd_net -net tx_uart_0_tx_done [get_bd_pins led_ctrl_0/tick] [get_bd_pins tx_uart_0/tx_done]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets tx_uart_0_tx_done]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins mux2x11b_0/A] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_pins mux2x11b_0/B] [get_bd_pins xlconstant_1/dout]
 
