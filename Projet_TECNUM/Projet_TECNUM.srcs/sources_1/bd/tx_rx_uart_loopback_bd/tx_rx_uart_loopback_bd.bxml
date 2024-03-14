@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="tx_rx_uart_loopback_bd" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1709632175"/>
-    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1709632175"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1709632175"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1709632175"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1709893876"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1709893876"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1709893876"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1709893876"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\tx_rx_uart_loopback_bd_rx_uart_0_0\tx_rx_uart_loopback_bd_rx_uart_0_0.xci" Type="IP">
         <Instance HierarchyPath="rx_uart_0"/>
@@ -71,6 +71,22 @@
       <File Name="sim\tx_rx_uart_loopback_bd.vhd" Type="VHDL">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\tx_rx_uart_loopback_bd_SYNCHRONIZER_0_0\tx_rx_uart_loopback_bd_SYNCHRONIZER_0_0.xci" Type="IP">
+        <Instance HierarchyPath="SYNCHRONIZER_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\tx_rx_uart_loopback_bd_SYNCHRONIZER_0_2\tx_rx_uart_loopback_bd_SYNCHRONIZER_0_2.xci" Type="IP">
+        <Instance HierarchyPath="SYNCHRONIZER_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="tx_rx_uart_loopback_bd_ooc.xdc" Type="XDC">
